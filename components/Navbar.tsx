@@ -1,10 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
-import { site, navLinks, mobileNavLinks } from "@/lib/data";
+import { Menu, X } from "lucide-react";
+import { navLinks, site } from "@/lib/data";
 import { cn } from "@/lib/cn";
+
+export function Brand() {
+  return (
+    <span
+      className="flex h-[30px] w-[30px] items-center justify-center rounded-lg text-[15px] font-bold text-white"
+      style={{
+        background: "linear-gradient(135deg, #0099ff, #6366f1)",
+        boxShadow: "0 4px 14px -2px rgba(0,153,255,0.5)",
+      }}
+    >
+      {site.initial}
+    </span>
+  );
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,57 +31,57 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onClickOutside = () => setOpen(false);
-    if (open) {
-      window.addEventListener("click", onClickOutside);
-      return () => window.removeEventListener("click", onClickOutside);
-    }
+    if (!open) return;
+    const close = () => setOpen(false);
+    window.addEventListener("click", close);
+    return () => window.removeEventListener("click", close);
   }, [open]);
 
   return (
     <>
       <nav
         className={cn(
-          "fixed left-0 right-0 top-0 z-50 py-4 transition-all duration-300",
-          scrolled && "glass border-b border-border",
+          "fixed inset-x-0 top-0 z-40 transition-all duration-300",
+          scrolled
+            ? "border-b border-border py-[11px] backdrop-blur-xl"
+            : "py-4",
         )}
+        style={scrolled ? { background: "rgba(10,10,10,0.72)" } : undefined}
       >
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6 md:px-10">
-          <a href="#top" className="flex items-center gap-2.5 text-sm font-semibold tracking-tight">
-            <BrandMark />
-            <span className="hidden sm:inline">{site.name}</span>
+        <div className="mx-auto flex max-w-site items-center justify-between gap-5 px-6 md:px-8">
+          <a href="#top" className="flex items-center gap-2.5 text-[15px] font-[560]">
+            <Brand />
+            <span className="hidden min-[480px]:inline">{site.shortName}</span>
           </a>
 
-          <div className="hidden items-center gap-1 lg:flex">
-            {navLinks.map((link) => (
+          <div className="hidden items-center gap-0.5 min-[880px]:flex">
+            {navLinks.map((l) => (
               <a
-                key={link.href}
-                href={link.href}
-                className="rounded-lg px-3.5 py-2 text-sm text-fg-muted transition-all hover:bg-accent-ghost hover:text-fg"
+                key={l.href}
+                href={l.href}
+                className="rounded-sm2 px-3.5 py-2 text-sm text-fg-muted transition-all hover:bg-white/5 hover:text-fg"
               >
-                {link.label}
+                {l.label}
               </a>
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
+          <div className="flex items-center gap-2.5">
             <a
               href="#booking"
-              className="hidden h-9 items-center gap-2 rounded-full bg-fg px-4 text-[13px] font-medium text-bg shadow-sm transition-all hover:-translate-y-px sm:inline-flex"
+              className="inline-flex h-[38px] items-center rounded-DEFAULT bg-white px-4 text-sm font-medium text-[#0a0a0a] transition-all hover:-translate-y-px"
             >
-              Book a call
-              <ArrowRight className="h-3.5 w-3.5" />
+              Book a consultation
             </a>
             <button
-              aria-label="Open menu"
+              aria-label="Menu"
               onClick={(e) => {
                 e.stopPropagation();
                 setOpen((v) => !v);
               }}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-fg lg:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-sm2 border border-border-2 min-[880px]:hidden"
             >
-              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {open ? <X className="h-[18px] w-[18px]" /> : <Menu className="h-[18px] w-[18px]" />}
             </button>
           </div>
         </div>
@@ -76,36 +89,29 @@ export function Navbar() {
 
       {open && (
         <div
-          className="glass fixed left-4 right-4 top-[70px] z-40 flex flex-col gap-0.5 rounded-2xl border border-border p-3 shadow-lg lg:hidden"
+          className="fixed inset-x-4 top-16 z-[39] flex flex-col gap-0.5 rounded-[18px] border border-border p-2.5 shadow-soft backdrop-blur-xl min-[880px]:hidden"
+          style={{ background: "rgba(16,16,18,0.9)" }}
           onClick={(e) => e.stopPropagation()}
         >
-          {mobileNavLinks.map((link) => (
+          {navLinks.map((l) => (
             <a
-              key={link.href}
-              href={link.href}
+              key={l.href}
+              href={l.href}
               onClick={() => setOpen(false)}
-              className="rounded-xl px-3.5 py-3 text-sm text-fg-muted transition-all hover:bg-bg-subtle hover:text-fg"
+              className="rounded-xl px-3.5 py-3 text-[15px] text-fg-muted transition-all hover:bg-white/5 hover:text-fg"
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
+          <a
+            href="#booking"
+            onClick={() => setOpen(false)}
+            className="rounded-xl px-3.5 py-3 text-[15px] text-fg-muted transition-all hover:bg-white/5 hover:text-fg"
+          >
+            Book a consultation
+          </a>
         </div>
       )}
     </>
-  );
-}
-
-export function BrandMark() {
-  return (
-    <span
-      className="inline-flex h-[30px] w-[30px] items-center justify-center rounded-lg font-mono text-sm font-semibold text-white"
-      style={{
-        background: "linear-gradient(135deg, var(--accent), var(--accent-strong))",
-        boxShadow:
-          "0 4px 12px -2px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-      }}
-    >
-      {site.initial}
-    </span>
   );
 }

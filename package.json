@@ -1,8 +1,8 @@
 {
-  "name": "thabiso-portfolio",
-  "version": "0.1.0",
+  "name": "thabiso-ndlovu-site",
+  "version": "1.0.0",
   "private": true,
-  "description": "Personal portfolio site for Thabiso Gift Ndlovu — Next.js + Tailwind + Framer Motion",
+  "description": "Personal site for Thabiso Gift Ndlovu — AI systems strategist. Framer-style dark aesthetic. Next.js + Tailwind + Framer Motion.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,7 +15,6 @@
     "framer-motion": "^11.3.19",
     "lucide-react": "^0.418.0",
     "next": "14.2.5",
-    "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

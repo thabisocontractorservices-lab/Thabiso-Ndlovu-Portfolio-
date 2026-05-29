@@ -1,87 +1,41 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class", '[data-theme="dark"]'],
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "var(--bg)",
-        "bg-subtle": "var(--bg-subtle)",
-        "bg-sunken": "var(--bg-sunken)",
-        "bg-elevated": "var(--bg-elevated)",
-        border: "var(--border)",
-        "border-strong": "var(--border-strong)",
-        fg: "var(--fg)",
-        "fg-muted": "var(--fg-muted)",
-        "fg-subtle": "var(--fg-subtle)",
-        accent: "var(--accent)",
-        "accent-strong": "var(--accent-strong)",
-        "accent-soft": "var(--accent-soft)",
-        "accent-ghost": "var(--accent-ghost)",
-        "status-live": "var(--status-live)",
-        "status-progress": "var(--status-progress)",
-        "status-beta": "var(--status-beta)",
-        "status-rd": "var(--status-rd)",
+        bg: "#0a0a0a",
+        "bg-1": "#0f0f11",
+        "bg-2": "#161619",
+        "bg-3": "#1c1c20",
+        border: "rgba(255,255,255,0.08)",
+        "border-2": "rgba(255,255,255,0.14)",
+        fg: "#f5f5f7",
+        "fg-muted": "rgba(255,255,255,0.56)",
+        "fg-subtle": "rgba(255,255,255,0.40)",
+        blue: "#0099ff",
+        "blue-bright": "#38b6ff",
+        violet: "#6366f1",
+        purple: "#a855f7",
       },
       fontFamily: {
-        sans: ["var(--font-geist)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
-        display: ["var(--font-instrument)", "serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      borderRadius: {
+        sm2: "10px",
+        DEFAULT: "14px",
+        lg2: "20px",
       },
       boxShadow: {
-        sm: "var(--shadow-sm)",
-        md: "var(--shadow-md)",
-        lg: "var(--shadow-lg)",
-        glow: "var(--shadow-glow)",
+        soft: "0 25px 50px -12px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.4)",
+      },
+      maxWidth: {
+        site: "1120px",
       },
       letterSpacing: {
-        tightest: "-0.035em",
-        tighter: "-0.025em",
-        tight: "-0.015em",
-      },
-      animation: {
-        "grid-drift": "gridDrift 30s linear infinite",
-        "glow-float": "glowFloat 12s ease-in-out infinite",
-        pulse: "pulse 2s ease-in-out infinite",
-        float: "float 6s ease-in-out infinite",
-        "bar-fill": "barFill 3s ease-out infinite",
-        "loader-pulse": "loaderPulse 1.2s ease-in-out infinite",
-        "loader-ring": "loaderRing 1.6s ease-out infinite",
-      },
-      keyframes: {
-        gridDrift: {
-          from: { backgroundPosition: "0 0" },
-          to: { backgroundPosition: "56px 56px" },
-        },
-        glowFloat: {
-          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
-          "50%": { transform: "translate(-30px, 30px) scale(1.05)" },
-        },
-        pulse: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.6" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-8px)" },
-        },
-        barFill: {
-          "0%": { width: "20%" },
-          "50%": { width: "85%" },
-          "100%": { width: "20%" },
-        },
-        loaderPulse: {
-          "0%, 100%": { transform: "scale(1)" },
-          "50%": { transform: "scale(0.95)" },
-        },
-        loaderRing: {
-          "0%": { transform: "scale(0.8)", opacity: "0.8" },
-          "100%": { transform: "scale(1.4)", opacity: "0" },
-        },
+        tightest: "-0.04em",
+        tighter: "-0.035em",
       },
     },
   },

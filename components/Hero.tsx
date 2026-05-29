@@ -1,144 +1,177 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { site, heroMockups } from "@/lib/data";
+import { ArrowRight, Check } from "lucide-react";
+import { heroChecklist, heroHealth } from "@/lib/data";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (delay: number) => ({
+const fade = {
+  hidden: { opacity: 0, y: 22 },
+  visible: (d: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.8, delay: d, ease: [0.2, 0.8, 0.2, 1] },
   }),
 };
 
 export function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen items-center overflow-hidden pb-20 pt-40 md:pb-30 md:pt-44">
+    <section className="relative overflow-hidden pb-20 pt-10 text-center">
       {/* background */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="grid-bg absolute inset-0" />
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div
-          className="absolute -right-24 -top-24 h-[480px] w-[480px] rounded-full opacity-25 blur-[80px]"
-          style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)" }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse 70% 50% at 50% 0%, #000 30%, transparent 75%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 50% at 50% 0%, #000 30%, transparent 75%)",
+          }}
         />
         <div
-          className="absolute -bottom-20 -left-20 h-[360px] w-[360px] rounded-full opacity-15 blur-[80px]"
-          style={{ background: "radial-gradient(circle, #a78bfa 0%, transparent 70%)" }}
+          className="absolute left-1/2 top-[-180px] h-[600px] w-[900px] -translate-x-1/2 blur-[40px]"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(0,153,255,0.22) 0%, rgba(99,102,241,0.12) 35%, transparent 70%)",
+          }}
         />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-[1200px] px-6 text-center md:px-10">
-        <motion.div
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="inline-flex items-center gap-2.5 rounded-full border border-border bg-bg-elevated px-3.5 py-1.5 pl-2.5 text-[13px] font-medium text-fg-muted shadow-sm"
-          style={{ backdropFilter: "blur(12px)" }}
-        >
-          <span className="inline-flex h-2 w-2 animate-pulse rounded-full bg-status-live shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-          {site.availability}
-        </motion.div>
-
+      <div className="relative z-10 mx-auto max-w-site px-6 md:px-8">
         <motion.h1
-          custom={0.08}
+          custom={0.06}
           initial="hidden"
           animate="visible"
-          variants={fadeUp}
-          className="mx-auto mt-8 max-w-[920px] text-[clamp(40px,7vw,80px)] font-medium leading-[1] tracking-tightest"
+          variants={fade}
+          className="mx-auto mt-7 max-w-[880px] text-[clamp(42px,7vw,84px)] font-semibold leading-[0.98] tracking-tightest"
         >
-          Building <span className="font-serif-italic">digital products</span>
-          <br />& AI systems for South Africa
+          Build AI systems
+          <br />
+          on <span className="text-grad">fundamentals</span>, not hype.
         </motion.h1>
 
         <motion.p
-          custom={0.16}
+          custom={0.13}
           initial="hidden"
           animate="visible"
-          variants={fadeUp}
-          className="mx-auto mt-6 max-w-[640px] text-[clamp(16px,1.6vw,19px)] leading-snug text-fg-muted"
+          variants={fade}
+          className="mx-auto mt-[26px] max-w-[600px] text-[clamp(17px,2vw,21px)] font-[450] leading-[1.5] text-fg-muted"
         >
-          I&apos;m Thabiso Gift Ndlovu — a marketer, AI builder, and startup founder creating SaaS products, automation systems, and digital platforms for the next generation of African businesses.
+          I help businesses implement practical AI and automation systems that remain valuable long after trends and tools change.
+        </motion.p>
+
+        <motion.p
+          custom={0.18}
+          initial="hidden"
+          animate="visible"
+          variants={fade}
+          className="mx-auto mt-4 max-w-[520px] text-[14.5px] text-fg-subtle"
+        >
+          Thabiso Gift Ndlovu — startup builder &amp; AI systems strategist, building practical digital products for South Africa.
         </motion.p>
 
         <motion.div
           custom={0.24}
           initial="hidden"
           animate="visible"
-          variants={fadeUp}
-          className="mt-10 flex flex-wrap justify-center gap-3"
+          variants={fade}
+          className="mt-[38px] flex flex-wrap justify-center gap-3"
         >
           <a
-            href="#projects"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-fg px-5 text-sm font-medium text-bg transition-all hover:-translate-y-px hover:shadow-lg"
+            href="#booking"
+            className="group inline-flex h-[50px] items-center gap-2 rounded-DEFAULT bg-white px-[26px] text-[15.5px] font-medium text-[#0a0a0a] transition-all hover:-translate-y-px hover:shadow-[0_10px_30px_-8px_rgba(255,255,255,0.25)]"
           >
-            View projects <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            Book a consultation
+            <ArrowRight className="h-[18px] w-[18px] transition-transform group-hover:translate-x-[3px]" />
           </a>
           <a
-            href="#booking"
-            className="glass-soft inline-flex h-11 items-center gap-2 rounded-full border border-border-strong px-5 text-sm font-medium text-fg transition-all hover:-translate-y-px hover:shadow-md"
+            href="#projects"
+            className="inline-flex h-[50px] items-center rounded-DEFAULT border border-border-2 bg-white/5 px-[26px] text-[15.5px] font-medium text-fg transition-all hover:-translate-y-px hover:bg-white/10"
           >
-            Book a call
+            View projects
           </a>
         </motion.div>
 
+        {/* stage mockup */}
         <motion.div
-          custom={0.32}
+          custom={0.3}
           initial="hidden"
           animate="visible"
-          variants={fadeUp}
-          className="relative mx-auto mt-20 flex max-w-[360px] flex-col gap-4 px-2 md:h-[220px] md:max-w-[960px] md:flex-row md:gap-0 md:px-0"
+          variants={fade}
+          className="relative mx-auto mt-[72px] max-w-[960px]"
         >
-          {heroMockups.map((m, i) => (
-            <MockupCard key={i} {...m} index={i} />
-          ))}
+          <div className="absolute -left-5 -top-6 z-10 hidden rounded-DEFAULT border border-border-2 p-[14px_16px] shadow-soft backdrop-blur-md min-[820px]:block" style={{ background: "rgba(22,22,25,0.85)" }}>
+            <div className="mb-[3px] flex items-center gap-[7px] text-[13px] font-[550] text-fg">
+              <span className="h-[7px] w-[7px] rounded-full bg-blue-bright shadow-[0_0_0_3px_rgba(0,153,255,0.2)]" />
+              Workflow mapped
+            </div>
+            <div className="text-xs text-fg-subtle">12 steps · 4 automated</div>
+          </div>
+          <div className="absolute -bottom-6 -right-[18px] z-10 hidden rounded-DEFAULT border border-border-2 p-[14px_16px] shadow-soft backdrop-blur-md min-[820px]:block" style={{ background: "rgba(22,22,25,0.85)" }}>
+            <div className="mb-[3px] flex items-center gap-[7px] text-[13px] font-[550] text-fg">
+              <span className="h-[7px] w-[7px] rounded-full bg-blue-bright shadow-[0_0_0_3px_rgba(0,153,255,0.2)]" />
+              System live
+            </div>
+            <div className="text-xs text-fg-subtle">Running since deploy</div>
+          </div>
+
+          <div
+            className="overflow-hidden rounded-lg2 border border-border-2 text-left shadow-soft"
+            style={{ background: "linear-gradient(180deg, #161619, #0f0f11)" }}
+          >
+            <div className="flex items-center gap-2 border-b border-border px-[18px] py-[14px]">
+              <span className="h-[11px] w-[11px] rounded-full bg-bg-3" />
+              <span className="h-[11px] w-[11px] rounded-full bg-bg-3" />
+              <span className="h-[11px] w-[11px] rounded-full bg-bg-3" />
+              <span className="ml-3.5 rounded-full border border-border bg-bg px-3.5 py-[5px] text-[12.5px] text-fg-subtle">
+                thabisondlovu.co.za / systems
+              </span>
+            </div>
+            <div className="grid grid-cols-1 gap-[18px] p-7 min-[721px]:grid-cols-[1.1fr_1fr]">
+              <div className="rounded-DEFAULT border border-border bg-bg p-5">
+                <div className="mb-3.5 text-[11.5px] uppercase tracking-[0.08em] text-fg-subtle">
+                  Implementation checklist
+                </div>
+                {heroChecklist.map((item, i) => (
+                  <div
+                    key={item}
+                    className={`flex items-center justify-between py-[11px] text-[13.5px] text-fg-muted ${i < heroChecklist.length - 1 ? "border-b border-border" : ""}`}
+                  >
+                    {item}
+                    <span className="flex h-[18px] w-[18px] items-center justify-center rounded-md bg-[rgba(0,153,255,0.16)] text-blue-bright">
+                      <Check className="h-[11px] w-[11px]" strokeWidth={3} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-DEFAULT border border-border bg-bg p-5">
+                <div className="mb-3.5 text-[11.5px] uppercase tracking-[0.08em] text-fg-subtle">
+                  System health
+                </div>
+                <div className="mt-1 flex flex-col gap-3.5">
+                  {heroHealth.map((h) => (
+                    <div key={h.label}>
+                      <div className="mb-[7px] flex justify-between text-[12.5px] text-fg-subtle">
+                        <span>{h.label}</span>
+                        <span>{h.value}%</span>
+                      </div>
+                      <div className="h-[7px] overflow-hidden rounded-full bg-bg-3">
+                        <div
+                          className="h-full rounded-full"
+                          style={{
+                            width: `${h.value}%`,
+                            background: "linear-gradient(90deg, #0099ff, #6366f1)",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
-  );
-}
-
-function MockupCard({
-  label,
-  title,
-  meta,
-  index,
-}: {
-  label: string;
-  title: string;
-  meta: string;
-  index: number;
-}) {
-  const positions = [
-    { top: "20px", left: "4%", width: "240px", delay: "0s" },
-    { top: "90px", left: "38%", width: "280px", delay: "-2s" },
-    { top: "30px", right: "4%", width: "240px", delay: "-4s" },
-  ];
-  const pos = positions[index];
-
-  return (
-    <div
-      className="glass rounded-2xl border border-border p-4 text-left shadow-lg md:absolute md:animate-float"
-      style={{
-        ...pos,
-        animationDelay: pos.delay,
-        animationPlayState: "running",
-      }}
-    >
-      <div className="mb-2.5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-fg-subtle">
-        <span className="h-1.5 w-1.5 rounded-full bg-status-live" />
-        {label}
-      </div>
-      <div className="mb-1.5 text-sm font-medium text-fg">{title}</div>
-      <div className="text-xs text-fg-muted">{meta}</div>
-      <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-bg-sunken">
-        <div
-          className="h-full animate-bar-fill rounded-full"
-          style={{ background: "linear-gradient(90deg, var(--accent), var(--accent-strong))" }}
-        />
-      </div>
-    </div>
   );
 }

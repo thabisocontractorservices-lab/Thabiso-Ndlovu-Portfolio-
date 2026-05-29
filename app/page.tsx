@@ -1,28 +1,28 @@
 import { Navbar } from "@/components/Navbar";
+import { Announce } from "@/components/Announce";
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
+import { Trust } from "@/components/Trust";
+import { Philosophy } from "@/components/Philosophy";
+import { Showcase } from "@/components/Showcase";
 import { Projects } from "@/components/Projects";
-import { Services } from "@/components/Services";
+import { About } from "@/components/About";
 import { Booking } from "@/components/Booking";
-import { Now } from "@/components/Now";
-import { Insights } from "@/components/Insights";
-import { Testimonials } from "@/components/Testimonials";
-import { Contact } from "@/components/Contact";
+import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 
 export default function HomePage() {
   return (
     <main>
       <Navbar />
+      <Announce />
       <Hero />
-      <About />
+      <Trust />
+      <Philosophy />
+      <Showcase />
       <Projects />
-      <Services />
+      <About />
       <Booking />
-      <Now />
-      <Insights />
-      <Testimonials />
-      <Contact />
+      <CtaBanner />
       <Footer />
     </main>
   );
