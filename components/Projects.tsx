@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Icon, type IconName } from "./Icon";
 import { projects, type ProjectStatus } from "@/lib/data";
@@ -7,6 +8,37 @@ const dot: Record<ProjectStatus, string> = {
   dev: "#a855f7",
   rd: "#94a3b8",
 };
+
+type Project = (typeof projects)[number];
+
+function CardInner({ p, linked }: { p: Project; linked: boolean }) {
+  return (
+    <>
+      <div className="mb-[22px] flex items-center justify-between">
+        <div className="flex h-[42px] w-[42px] items-center justify-center rounded-[11px] border border-border bg-bg-3 text-blue-bright">
+          <Icon name={p.iconName as IconName} className="h-5 w-5" strokeWidth={1.8} />
+        </div>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-3 px-2.5 py-[5px] pl-[9px] text-[11px] font-medium uppercase tracking-[0.04em] text-fg-muted">
+          <span className="h-1.5 w-1.5 rounded-full" style={{ background: dot[p.status] }} />
+          {p.statusLabel}
+        </span>
+      </div>
+      <h3 className="mb-2.5 flex items-center gap-1.5 text-[19px] font-[560] tracking-tighter">
+        {p.name}
+        {linked && (
+          <ArrowUpRight className="h-[18px] w-[18px] text-fg-subtle transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-bright" />
+        )}
+      </h3>
+      <p className="flex-1 text-sm leading-[1.55] text-fg-muted">{p.description}</p>
+      <div className="mt-5 border-t border-border pt-4 text-[11.5px] uppercase tracking-[0.05em] text-fg-subtle">
+        {p.tag}
+      </div>
+    </>
+  );
+}
+
+const cardClass =
+  "group flex h-full min-h-[270px] flex-col rounded-lg2 border border-border bg-bg-1 p-[26px] transition-all duration-300 hover:-translate-y-[3px] hover:border-border-2 hover:shadow-soft";
 
 export function Projects() {
   return (
@@ -33,22 +65,20 @@ export function Projects() {
         <div className="mt-14 grid grid-cols-1 gap-[18px] min-[760px]:grid-cols-3">
           {projects.map((p, i) => (
             <Reveal key={p.name} delay={0.07 * (i + 1)}>
-              <article className="flex h-full min-h-[270px] flex-col rounded-lg2 border border-border bg-bg-1 p-[26px] transition-all duration-300 hover:-translate-y-[3px] hover:border-border-2 hover:shadow-soft">
-                <div className="mb-[22px] flex items-center justify-between">
-                  <div className="flex h-[42px] w-[42px] items-center justify-center rounded-[11px] border border-border bg-bg-3 text-blue-bright">
-                    <Icon name={p.iconName as IconName} className="h-5 w-5" strokeWidth={1.8} />
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-3 px-2.5 py-[5px] pl-[9px] text-[11px] font-medium uppercase tracking-[0.04em] text-fg-muted">
-                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: dot[p.status] }} />
-                    {p.statusLabel}
-                  </span>
-                </div>
-                <h3 className="mb-2.5 text-[19px] font-[560] tracking-tighter">{p.name}</h3>
-                <p className="flex-1 text-sm leading-[1.55] text-fg-muted">{p.description}</p>
-                <div className="mt-5 border-t border-border pt-4 text-[11.5px] uppercase tracking-[0.05em] text-fg-subtle">
-                  {p.tag}
-                </div>
-              </article>
+              {p.url ? (
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${cardClass} cursor-pointer hover:!border-[rgba(0,153,255,0.4)]`}
+                >
+                  <CardInner p={p} linked />
+                </a>
+              ) : (
+                <article className={cardClass}>
+                  <CardInner p={p} linked={false} />
+                </article>
+              )}
             </Reveal>
           ))}
         </div>

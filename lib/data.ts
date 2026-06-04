@@ -67,15 +67,17 @@ export const projects: {
   name: string;
   description: string;
   tag: string;
+  url?: string;
 }[] = [
   {
     iconName: "building",
     status: "p",
     statusLabel: "In progress",
-    name: "KZNPlumbers.co.za",
+    name: "kznplumbers.co.za",
     description:
       "A directory platform helping homeowners find verified plumbers in South Africa, while giving plumbers a dedicated dashboard to manage and grow their business.",
     tag: "Marketplace · Operations",
+    url: "https://www.kznplumbers.co.za/",
   },
   {
     iconName: "file",
